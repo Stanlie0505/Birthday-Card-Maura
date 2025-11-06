@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>5 Months With You — Maura</title>
+  <style>
+    :root {
+      --bg1: #fff6f8;
+      --accent: #ff6fa3;
+      --text: #3b2b2b;
+      --card: #fff0f6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, var(--bg1), #ffeef7);
+      font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 18px 60px rgba(203, 77, 120, 0.12);
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(6px);
+    }
+    .bg-lily {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.12;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255, 240, 245, 0.9), rgba(255, 245, 248, 0.6)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0%" stop-color="%23fff5f9"/><stop offset="100%" stop-color="%23ffeef7"/></linearGradient></defs><g fill="url(%23g)" opacity="0.85"><ellipse cx="150" cy="120" rx="120" ry="60"/><path d="M450 20c40 26 90 40 130 14s52-6 78 14 26 64 0 92-78 28-120 8-64-60-108-74-100-14-114-28 44-42 118-50z"/><path d="M80 300c28-40 84-66 140-52s84 52 112 86 56 78 28 104-112 40-168 14-84-84-112-118 0-28 0-28z"/></g></svg>');
+      background-repeat: no-repeat;
+      background-position: center right;
+      background-size: contain;
+    }
+    header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      border-bottom: 1px solid rgba(255, 230, 240, 0.6);
+    }
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .badge {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #ffb3d6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 20px;
+    }
+    h1 { margin: 0; font-size: 20px; }
+    .lead { margin: 4px 0 0; color: #6b4b58; font-size: 13px; }
+    .controls { display: flex; gap: 10px; }
+    .btn {
+      background: var(--accent);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 0;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(155, 75, 110, 0.12);
+      color: var(--accent);
+      padding: 8px 12px;
+    }
+    main {
+      display: flex;
+      gap: 20px;
+      align-items: stretch;
+      padding: 28px;
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 900px) {
+      main { flex-direction: column; }
+    }
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      justify-content: center;
+    }
+    .message-card {
+      background: linear-gradient(180deg, rgba(255, 245, 249, 0.9), rgba(255, 240, 247, 0.95));
+      padding: 26px;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(203, 77, 120, 0.06);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 700ms ease;
+    }
+    .message-card.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .message-card p { margin: 0; line-height: 1.6; font-size: 16px; }
+    .meta { margin-top: 12px; color: #6b4b58; font-size: 13px; }
+    .right {
+      width: 420px;
+      max-width: 42%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 900px) {
+      .right { max-width: 100%; width: 100%; order: 1; }
+      .left { order: 2; }
+    }
+    .photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    footer {
+      padding: 18px;
+      text-align: center;
+      color: #6c4652;
+      font-size: 13px;
+      position: relative;
+      z-index: 2;
+    }
+    #confetti {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="container">
+    <div class="bg-lily"></div>
+    <header>
+      <div class="title">
+        <div class="badge">5♥</div>
+        <div>
+          <h1>5 Months With You</h1>
+          <div class="lead">Stanlie ❤️ Maura · Celebrating November 7th</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="btn" id="playBtn">Surprise 💖</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="left">
+        <div class="message-card" id="messageCard">
+          <p>
+            Happy Birthday Maura ❤️ Happy Birthday to someone who means so much to me.
+            I hope today reminds you how special you are.
+            You make the world brighter just by being in it.
+            You’re one of a kind, and I’m so thankful to have you in my life.
+            You’ve made such a difference in my life.
+            Getting to know you has been the most beautiful thing that's ever happened to me.
+            I also want to say sorry if I made you feel unappreciated,
+            but I just want to let you know that I really love you more than words could ever describe.
+            You've become my favorite person and a perfect girlfriend.
+            No matter what happens, I will still love you.
+            Thank you for being who you are. You really mean a lot to me.
+            Wish you all the best.
+          </p>
+          <div class="meta">— Stanlie</div>
+        </div>
+      </section>
+
+      <aside class="right">
+        <div class="photo" id="photoBox">
+          <!-- Replace this path with your real image URL or a local file in the same folder -->
+          <img src="C:\Users\USER\OneDrive\ドキュメント\VSCode\E-Card\WhatsApp Image 2025-11-06 at 22.41.58_6adb0943.jpg" alt="photo of Stanlie and Maura" id="mainPhoto">
+        </div>
+      </aside>
+    </main>
+
+    <footer>Made with love — customized for Maura.</footer>
+  </div>
+
+  <script>
+    // --- YouTube player ---
+    const VIDEO_ID = '1BCqCgamowo';
+    let player;
+
+    function loadYouTubeAPI(callback) {
+      if (window.YT && window.YT.Player) {
+        callback();
+        return;
+      }
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      window.onYouTubeIframeAPIReady = callback;
+    }
+
+    function createPlayer() {
+      player = new YT.Player('ytplayer', {
+        height: '0',
+        width: '0',
+        videoId: VIDEO_ID,
+        playerVars: {
+          playsinline: 1,
+          controls: 0,
+          rel: 0,
+          showinfo: 0
+        },
+        events: { 'onReady': onPlayerReady }
+      });
+    }
+
+    function onPlayerReady(e) {
+      // We'll unmute and play on button click
+    }
+
+    // --- Confetti ---
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    });
+
+    let confetti = [], raf;
+    function startConfetti() {
+      confetti = [];
+      for (let i = 0; i < 100; i++) {
+        confetti.push({
+          x: Math.random() * W,
+          y: Math.random() * -H,
+          r: Math.random() * 8 + 4,
+          tilt: Math.random() * 10,
+          speed: Math.random() * 3 + 1,
+          color: ['#ff6fa3', '#ffb3d6', '#ffd9ec', '#ffd1e8', '#ff9fc4'][Math.floor(Math.random() * 5)]
+        });
+      }
+      drawConfetti();
+      setTimeout(stopConfetti, 7000);
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, W, H);
+      confetti.forEach(p => {
+        p.y += p.speed;
+        p.tilt += 0.1;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.tilt * 0.05);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6);
+        ctx.restore();
+        if (p.y > H + p.r) p.y = -10;
+      });
+      raf = requestAnimationFrame(drawConfetti);
+    }
+
+    function stopConfetti() {
+      confetti = [];
+      cancelAnimationFrame(raf);
+      ctx.clearRect(0, 0, W, H);
+    }
+
+    // --- Reveal message and play music ---
+    const playBtn = document.getElementById('playBtn');
+    const messageCard = document.getElementById('messageCard');
+
+    function revealAll() {
+      messageCard.classList.add('visible');
+      const img = document.getElementById('mainPhoto');
+      if (img) {
+        img.style.opacity = 0;
+        img.style.transform = 'scale(0.98)';
+        img.style.transition = 'all 700ms ease';
+        setTimeout(() => {
+          img.style.opacity = 1;
+          img.style.transform = 'scale(1)';
+        }, 300);
+      }
+    }
+
+    function startAll() {
+      loadYouTubeAPI(() => {
+        if (!player) createPlayer();
+        setTimeout(() => {
+          try {
+            player.unMute && player.unMute();
+            player.playVideo();
+          } catch (e) { }
+        }, 800);
+      });
+      startConfetti();
+      revealAll();
+    }
+
+    playBtn.addEventListener('click', startAll);
+
+    // Hidden YouTube player element
+    const div = document.createElement('div');
+    div.id = 'ytplayer';
+    div.style.display = 'none';
+    document.body.appendChild(div);
+  </script>
+</body>
+</html>
